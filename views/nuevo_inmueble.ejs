@@ -1,0 +1,48 @@
+<%- include('cabecera'); %>
+
+<h1 class="center m-4">Formulario de alta de nuevo inmueble</h1>
+
+<% if( (typeof error !== "undefined") && error==true ){ %>
+        <div id="nuevoError1" class="alert alert-danger">
+                <%= mensajeError %>
+        </div>
+<% }else if(error==false){ %>
+        <div id="nuevoOK1" class="alert alert-success">
+                Contacto añadido correctamente
+        </div>
+<% } %>
+
+<form action="/inmuebles" enctype="multipart/form-data" method="POST">
+    <div class="form-group">
+            <label for="tipo">Selecciona tipo:</label>
+            <select name="tipo" id="tipo">
+                <% if( (typeof tipos !== "undefined") || tipos.length > 0){ tipos.forEach( tipo => {%>
+                    <option value="<%= tipo.id %>">
+                        <%= tipo.nombre %>
+                    </option>
+                <% }); }%>
+            </select>
+    </div>
+    <div class="form-group">
+        <label for="descripción">Describe el inmueble:</label>
+        <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
+    </div>
+    <div class="form-group">
+            <label for="precio">Precio del inmueble:</label>
+            <input type="number" class="form-control" id="precio" name="precio" />
+    </div>
+    <div class="form-group">
+            <label for="habitaciones">Número de habitaciones:</label>
+            <input type="number" class="form-control" id="habitaciones" name="habitaciones" />
+    </div>
+    <div class="form-group">
+            <label for="superficie">Superficie en metros cuadrados:</label>
+            <input type="number" class="form-control" id="superficie" name="superficie" />
+    </div>
+    <div class="form-group">
+        <label for="imagen">Imagen:</label>
+        <input type="file" class="form-control" id="imagen" name="imagen" />
+    </div>
+    <button class="btn btn-secondary" type="submit">Enviar</button>
+</form>
+<%- include('pie'); %>

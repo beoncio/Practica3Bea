@@ -1,0 +1,33 @@
+#cabecera
+{
+    margin-bottom: 30px;
+}
+#titulo
+{
+    float:left;
+    width:100%;
+    margin-bottom: 20px;
+}
+#logo
+{
+    float: left;
+    width: 50px;
+    vertical-align: center;
+}
+#textotitulo
+{
+    float: left;
+    color: white;
+}
+#nuevoOK
+{
+    display: none;
+}
+#nuevoError
+{
+    display: none;
+}
+
+.center{
+    text-align: center;
+  }

@@ -1,0 +1,31 @@
+<%- include('cabecera'); %>
+<h1 class="center m-4">Ficha de Inmueble</h1>
+<% if (inmueble) {  %>
+            <div class="col-12">
+                <div class="card mt-4" style="max-width: auto;">
+                    <img class="card-img-top" src="/uploads/<%= inmueble.imagen %>" alt="">
+                    <div class="card-body m-auto">
+                        <h4 class="card-title center mb-4">
+                            <strong><%= inmueble.tipo.nombre %></strong>
+                        </h4>
+                        <p class="card-text m-auto center">
+                            <strong><%= inmueble.descripcion %></strong>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                                <span class="float-left mr-3">Superficie: <%= inmueble.superficie %> m2</span>
+                                <span class="float-left mr-3">Nº Habitaciones: <%= inmueble.habitaciones %></span>
+                        </small>
+                        <span class="float-right"> Precio: <%= inmueble.precio %> €</span>
+                    </div>
+                    <div class="m-0">
+                        <a class="btn btn-danger" style="width: 100%;" onclick="borrar('<%=inmueble.id%>')">Borrar </a>
+                    </div>
+                </div>
+            </div>
+<% } else { %>
+    <p class="alert alert-danger">No hay inmuebles</p>
+<% } %>
+
+<%- include('pie'); %>

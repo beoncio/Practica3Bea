@@ -1,0 +1,89 @@
+<%- include('cabecera'); %>
+    <nav class="nav class="navbar navbar-light" style="background-color: #5b6a75;"">
+        <div class="row">
+            <!-- <div class="form-group col-md-3 col-md-offset-1 center">
+                <label for="tipo">Selecciona tipo:</label>
+                <select name="tipo" id="tipo">
+                    <% if( (typeof tipos !== "undefined") || tipos.length > 0){ tipos.forEach( tipo => {%>
+                        <option value="<%= tipo.id %>">
+                            <%= tipo.nombre %>
+                        </option>
+                    <% }); }%>
+                </select>
+            </div> -->
+            
+            <div class="col-md-2 center align-middle pt-4">
+                <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu" 
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Tipo Inmueble
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        <a class="dropdown-item <%= (idtipo=="undefined") ? 'bg-primary' : ''%>" href="/inmuebles">Todos</a>
+                        <div class="dropdown-divider"></div>
+                        <%if( (typeof tipos !== "undefined") || tipos.length > 0){ tipos.forEach(tipo => { %>
+                            <a class="dropdown-item <%= (idtipo!=="undefined" && idtipo==tipo._id) ? 'bg-primary' : ''%>" href="/inmuebles/tipo/<%= tipo._id %>">
+                                <%= tipo.nombre %>
+                            </a>
+                            <% });} %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <form action="/inmuebles/filtrar" method="GET" class="row text-light">
+                    <div class="form-group col-md-3 center">
+                        <label for="precio">Precio máximo:</label>
+                        <input type="number" name="precio" value="<%= (typeof filtros !== 'undefined')? filtros.precio : '0' %>" id="precio">
+                    </div>
+                    <div class="form-group col-md-3 center">
+                        <label for="superficie">Metros mínimos:</label>
+                        <input type="number" name="superficie" value="<%= (typeof filtros !== 'undefined')? filtros.superficie : '0' %>" id="superficie">
+                    </div>
+                    <div class="form-group col-md-3 center">
+                        <label for="habitaciones">Nº de habitaciones:</label>
+                        <input type="number" name="habitaciones" value="<%= (typeof filtros !== 'undefined')? filtros.habitaciones : '0' %>" id="habitaciones">
+                    </div>
+                
+                    <div class="form-group col-md-3 center">
+                        <input class="btn btn-info mt-4" type="submit" value="Filtrar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <% if (typeof filtros != 'undefined') {  %>
+
+        
+    <% }  %>
+    <% if (inmuebles.length > 0) {  %>
+        <div class="card-deck mb-4">
+            <% inmuebles.forEach( inmueble => {%>
+                <div class="col-6">
+                    <div class="card mt-4" style="max-width: auto;">
+                        <img class="card-img-top" src="/uploads/<%= inmueble.imagen %>" alt="">
+                        <div class="card-body m-auto">
+                            <h4 class="card-title center mb-4">
+                                <strong><%= inmueble.tipo.nombre %></strong>
+                            </h4>
+                            <p class="card-text m-auto center">
+                                <strong><%= inmueble.descripcion %></strong>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">
+                                    <span class="float-left mr-3">Superficie: <%= inmueble.superficie %> m2</span>
+                                    <span class="float-left mr-3">Nº Habitaciones: <%= inmueble.habitaciones %></span>
+                            </small>
+                            <span class="float-right"> Precio: <%= inmueble.precio %> €</span>
+                        </div>
+                        <div class="m-0">
+                            <a href="/inmuebles/<%= inmueble.id %>" class="btn btn-info" style="width: 100%;">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <p class="alert alert-danger">No hay inmuebles</p>
+    <% } %>
+<%- include('pie'); %>
